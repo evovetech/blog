@@ -16,7 +16,7 @@
 
 package tech.evove.sample;
 
-public final class MapperWrapper<R, T> implements Mapper<R, T> {
+public final class MapperWrapper<R, T> implements MapperExtension<R, T> {
     private final Mapper<? extends R, ? super T> actual;
 
     public MapperWrapper(Mapper<? extends R, ? super T> actual) {
@@ -28,8 +28,20 @@ public final class MapperWrapper<R, T> implements Mapper<R, T> {
         this.actual = actual;
     }
 
+    public static <R, T> Mapper<R, T> create(Mapper<? extends R, ? super T> mapper) {
+        return new MapperWrapper<>(mapper);
+    }
+
+    public static <R2, R1 extends R2, T1, T2 extends T1> Mapper<R2, T2> cast(Mapper<R1, T1> mapper) {
+        return new MapperWrapper<R2, T2>(mapper);
+    }
+
     @Override public R map(T t) {
         // Safely put in a T and return an R with the proper bounded wildcards
         return actual.map(t);
+    }
+
+    @Override public <T2 extends T> Mapper<R, T2> cast() {
+        return new MapperWrapper<>(actual);
     }
 }
