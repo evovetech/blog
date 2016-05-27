@@ -1,0 +1,21 @@
+# Site settings
+title: Clean Blog
+header-img: img/home-bg.jpg
+email: layne@evove.tech
+copyright_name: Layne Penney
+description: "Blog"
+baseurl: "/startbootstrap-clean-blog-jekyll"
+url: "http://laynepenney.com"
+twitter_username: laynepenney
+github_username:  laynepenney
+facebook_username:  layneswerve
+email_username:  layne@evove.tech
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+
+gems: [jekyll-paginate, jekyll-feed]
